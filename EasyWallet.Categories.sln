@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31112.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyWallet.Categories.Api", "EasyWallet.Categories.Api\EasyWallet.Categories.Api.csproj", "{8FD946A9-04B3-4244-B46E-767B74E329E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyWallet.Categories.Data", "EasyWallet.Categories.Data\EasyWallet.Categories.Data.csproj", "{D0766BCC-9CF1-43A9-88EB-102A42DE9E70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyWallet.Categories.Business", "EasyWallet.Categories.Business\EasyWallet.Categories.Business.csproj", "{7CCB3C09-2801-4489-B4A7-E8EBDB528535}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8FD946A9-04B3-4244-B46E-767B74E329E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FD946A9-04B3-4244-B46E-767B74E329E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FD946A9-04B3-4244-B46E-767B74E329E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FD946A9-04B3-4244-B46E-767B74E329E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0766BCC-9CF1-43A9-88EB-102A42DE9E70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0766BCC-9CF1-43A9-88EB-102A42DE9E70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0766BCC-9CF1-43A9-88EB-102A42DE9E70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0766BCC-9CF1-43A9-88EB-102A42DE9E70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CCB3C09-2801-4489-B4A7-E8EBDB528535}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CCB3C09-2801-4489-B4A7-E8EBDB528535}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CCB3C09-2801-4489-B4A7-E8EBDB528535}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CCB3C09-2801-4489-B4A7-E8EBDB528535}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E1F03CE6-B16A-441D-8F1B-9A389AAFC302}
+	EndGlobalSection
+EndGlobal
