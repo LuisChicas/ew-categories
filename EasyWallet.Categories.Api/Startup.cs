@@ -1,4 +1,7 @@
+using EasyWallet.Categories.Api.Abstractions;
 using EasyWallet.Categories.Api.Filters;
+using EasyWallet.Categories.Api.Middlewares;
+using EasyWallet.Categories.Api.Services;
 using EasyWallet.Categories.Business.Abstractions;
 using EasyWallet.Categories.Business.Services;
 using EasyWallet.Categories.Data;
@@ -32,6 +35,7 @@ namespace EasyWallet.Categories.Api
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddTransient<ICategoryService, CategoryService>();
+            services.AddScoped<IErrorService, ErrorService>();
 
             services.AddControllers(o => o.Filters.Add<ErrorHandlerFilter>());
         }
@@ -47,6 +51,8 @@ namespace EasyWallet.Categories.Api
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseMiddleware<ApiKeyMiddleware>();
 
             app.UseEndpoints(endpoints =>
             {

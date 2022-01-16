@@ -3,12 +3,34 @@
     public class Response<T>
     {
         public string Message { get; set; }
-        public T Data { get; set; }
+        public virtual T Data { get; set; }
+        public Error Error { get; set; }
+
+        public Response() { }
+
+        public Response(T data)
+        {
+            Data = data;
+        }
     }
 
-    public class Response
+    public class NoDataResponse : Response<object>
     {
-        public string Message { get; set; }
-        public object Data => null;
+        public override object Data => null;
+
+        public NoDataResponse() { }
+
+        public NoDataResponse(string message) 
+        {
+            Message = message;
+        }
+    }
+
+    public class ErrorResponse : NoDataResponse
+    {
+        public ErrorResponse(Error error)
+        {
+            Error = error;
+        }
     }
 }

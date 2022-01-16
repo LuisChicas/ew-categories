@@ -1,6 +1,8 @@
-﻿using EasyWallet.Categories.Api.Dtos;
+﻿using EasyWallet.Categories.Api.Abstractions;
+using EasyWallet.Categories.Api.Dtos;
 using EasyWallet.Categories.Api.Helpers;
 using EasyWallet.Categories.Business.Abstractions;
+using EasyWallet.Categories.Business.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,24 +16,39 @@ namespace EasyWallet.Categories.Api.Controllers
     public class CategoriesController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
+        private readonly IErrorService _errorService;
 
-        public CategoriesController(ICategoryService categoryService)
+        public CategoriesController(ICategoryService categoryService, IErrorService errorService)
         {
             _categoryService = categoryService;
+            _errorService = errorService;
         }
 
         [HttpPost]
-        public async Task<Response<CreateCategoryResponse>> Create([FromBody] CreateCategoryRequest request)
+        public async Task<IActionResult> Create([FromBody] CreateCategoryRequest request)
         {
-            int categoryId = await _categoryService.CreateCategory(request.UserId, request.Name, request.KeywordsNames);
+            int categoryId;
 
-            return new Response<CreateCategoryResponse>
+            try
             {
-                Data = new CreateCategoryResponse
+                categoryId = await _categoryService.CreateCategory(request.UserId, request.Name, request.KeywordsNames);
+            }
+            catch (DuplicatedCategoryNameException)
+            {
+                return BadRequest(new ErrorResponse(_errorService.DuplicatedCategoryNameError));
+            }
+            catch (DuplicatedKeywordNameException e)
+            {
+                var errorResponse = new ErrorResponse(_errorService.DuplicatedKeywordNameError);
+                errorResponse.Error.Data.Add("KeywordName", e.Data["keywordName"]);
+                return BadRequest(errorResponse);
+            }
+
+            return Ok(new Response<CreateCategoryResponse>(
+                new CreateCategoryResponse
                 {
                     CategoryId = categoryId
-                }
-            };
+                }));
         }
 
         [HttpGet]
@@ -71,19 +88,19 @@ namespace EasyWallet.Categories.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<Response> Update(int id, [FromBody] UpdateCategoryRequest request)
+        public async Task<NoDataResponse> Update(int id, [FromBody] UpdateCategoryRequest request)
         {
             await _categoryService.UpdateCategory(id, request.Name, request.KeywordsNames);
 
-            return new Response { Message = "Category updated." };
+            return new NoDataResponse { Message = "Category updated." };
         }
 
         [HttpDelete("{id}")]
-        public async Task<Response> Delete(int id)
+        public async Task<NoDataResponse> Delete(int id)
         {
             await _categoryService.DeleteCategory(id);
 
-            return new Response { Message = "Category deleted." };
+            return new NoDataResponse { Message = "Category deleted." };
         }
     }
 }

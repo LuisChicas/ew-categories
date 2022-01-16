@@ -22,7 +22,7 @@ namespace EasyWallet.Categories.Api.Filters
                     $"Exception: {context.Exception.Message}\n" +
                     $"Url: {context.HttpContext.Request.Path + context.HttpContext.Request.QueryString.Value}\n");
 
-                var response = new Response 
+                var response = new NoDataResponse 
                 { 
                     Message = "Something went wrong." 
                 };
